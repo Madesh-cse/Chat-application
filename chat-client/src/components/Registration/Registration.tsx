@@ -3,8 +3,11 @@ import { NavLink } from "react-router-dom";
 import { TbWorld } from "react-icons/tb";
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Registration() {
+
+  const navigate = useNavigate()
 
     const [userData,setuserData] = useState({
         name:'',
@@ -22,6 +25,8 @@ function Registration() {
             email:'',
             password:'',
         })
+
+        navigate("/Login")
     }
 
   return (

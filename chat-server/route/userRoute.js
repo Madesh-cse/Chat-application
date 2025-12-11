@@ -4,6 +4,7 @@ const { body } = require("express-validator");
 
 const authController = require("../controller/authController");
 const User = require("../model/user");
+const isAuth = require("../middleware/is-auth")
 
 router.post("/signup", [
   body("email")
@@ -29,5 +30,13 @@ router.post("/signup", [
    .isEmpty()
    .withMessage("Must not to be empty"),
 ],authController.SignUp);
+
+router.post('/login', authController.SignIn);
+
+router.get('/verify',isAuth,(req,res)=>{
+  res.status(200).json({ message: 'Token is valid', userId: req.userId });
+})
+
+router.get('/user-Info',isAuth, authController.getUserInfo)
 
 module.exports = router
